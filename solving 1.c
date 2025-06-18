@@ -8,34 +8,59 @@ int main() {
 
     int stack[size];  // Declare stack
     int top = -1;     // Initialize top to -1
+    int option;       // Variable for user choice
 
-    int option = 1;  // Loop control variable
-
-    while (option) { // Loop to allow multiple push operations
-        // Check for stack overflow
-        if (top == size - 1) {
-            printf("Stack Overflow! Cannot push more elements.\n");
-            break;  // Exit loop if stack is full
-        } 
-
-        int push_value;
-        printf("Enter value to push: ");
-        scanf("%d", &push_value);
-
-        // Push operation
-        top++;
-        stack[top] = push_value;
-
-        // Print the stack
-        printf("Stack after push: ");
-        for (int i = 0; i <= top; i++) {
-            printf("%d ", stack[i]);
-        }
-        printf("\n");
-
-        // Ask user if they want to push another value
-        printf("Do you want to push another value? (1 for Yes, 0 for No): ");
+    while (1) { // Infinite loop to handle multiple operations
+        printf("\nChoose operation:\n");
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Exit\n");
+        printf("Enter choice: ");
         scanf("%d", &option);
+
+        if (option == 1) {  // Push Operation
+            // Check for stack overflow
+            if (top == size - 1) {
+                printf("Stack Overflow! Cannot push more elements.\n");
+            } else {
+                int push_value;
+                printf("Enter value to push: ");
+                scanf("%d", &push_value);
+                top++;
+                stack[top] = push_value;
+                printf("Stack after push: ");
+                for (int i = 0; i <= top; i++) {
+                    printf("%d ", stack[i]);
+                }
+                printf("\n");
+            }
+        } 
+        else if (option == 2) {  // Pop Operation
+            // Check for stack underflow
+            if (top == -1) {
+                printf("Stack Underflow! No elements to pop.\n");
+            } else {
+                printf("Popped value: %d\n", stack[top]);
+                top--; // Decrement top
+                
+                printf("Stack after pop: ");
+                if (top == -1) {
+                    printf("Empty Stack\n");
+                } else {
+                    for (int i = 0; i <= top; i++) {
+                        printf("%d ", stack[i]);
+                    }
+                    printf("\n");
+                }
+            }
+        } 
+        else if (option == 3) {  // Exit Operation
+            printf("Exiting program...\n");
+            break; // Exit the loop
+        } 
+        else {
+            printf("Invalid choice! Please enter 1, 2, or 3.\n");
+        }
     }
 
     return 0;
